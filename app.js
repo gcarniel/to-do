@@ -10,7 +10,29 @@ const addItemIntoTodo = inputValue => {
         </li>`
 }
 
+const manipulateClass = (todo, classToAdd, classToremove) => {
+    todo.forEach(todo => {
+        todo.classList.add(classToAdd)
+        todo.classList.remove(classToremove)
+    })
+}
 
+const showItemTodo = todo => {
+    manipulateClass(todo, 'd-flex', 'hidden')
+}
+
+const hideItemTodo = todo => {
+    manipulateClass(todo, 'hidden', 'd-flex')
+}
+
+inputTextSearchTodo.addEventListener('input', () => {
+    const todoList = Array.from(todosList.children)
+    const inputSearched = inputTextSearchTodo.value.toLowerCase()
+    const todoMatched = todoList.filter(todo => todo.textContent.toLowerCase().includes(inputSearched))
+
+    hideItemTodo(todoList)
+    showItemTodo(todoMatched)
+})
 
 
 inputTextAddTodo.addEventListener('submit', event => {
