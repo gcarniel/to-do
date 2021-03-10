@@ -34,17 +34,7 @@ const hideItemTodo = todo => {
     manipulateClass(todo, 'hidden', 'd-flex')
 }
 
-inputTextSearchTodo.addEventListener('input', () => {
-    const todoList = Array.from(todosList.children)
-    const inputSearched = inputTextSearchTodo.value.toLowerCase()
-    const todoMatched = todoList.filter(todo => todo.textContent.toLowerCase().includes(inputSearched))
-
-    hideItemTodo(todoList)
-    showItemTodo(todoMatched)
-})
-
-
-inputTextAddTodo.addEventListener('submit', event => {
+const eventSubmitAddItem = event => {
     event.preventDefault()
 
     const inputValue = event.target.add.value.trim()
@@ -53,10 +43,25 @@ inputTextAddTodo.addEventListener('submit', event => {
         addItemIntoTodo(inputValue)
         event.target.reset()
     }
-})
+}
 
-todosList.addEventListener('click', event => {
+const eventInputSearchItem = () => {
+    const todoList = Array.from(todosList.children)
+    const inputSearched = inputTextSearchTodo.value.toLowerCase()
+    const todoMatched = todoList.filter(todo => {
+        return todo.textContent.toLowerCase().includes(inputSearched)
+    })
+
+    hideItemTodo(todoList)
+    showItemTodo(todoMatched)
+}
+
+const eventClickRemoveItem = event => {
     const clickedElement = event.target
     removeItemTodo(clickedElement)
-})
+}
+
+inputTextAddTodo.addEventListener('submit', eventSubmitAddItem)
+inputTextSearchTodo.addEventListener('input', eventInputSearchItem)
+todosList.addEventListener('click', eventClickRemoveItem)
 
