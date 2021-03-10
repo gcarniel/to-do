@@ -10,6 +10,15 @@ const addItemIntoTodo = inputValue => {
         </li>`
 }
 
+const removeItemTodo = clickedElement => {
+    const trashItem = clickedElement.dataset.trash
+    const itemTodo = document.querySelector(`[data-todo="${trashItem}"]`)
+
+    if(trashItem){
+        itemTodo.remove()
+    }
+}
+
 const manipulateClass = (todo, classToAdd, classToremove) => {
     todo.forEach(todo => {
         todo.classList.add(classToAdd)
@@ -45,3 +54,9 @@ inputTextAddTodo.addEventListener('submit', event => {
         event.target.reset()
     }
 })
+
+todosList.addEventListener('click', event => {
+    const clickedElement = event.target
+    removeItemTodo(clickedElement)
+})
+
