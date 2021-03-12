@@ -6,7 +6,7 @@ const addItemIntoTodo = inputValue => {
         todosList.innerHTML += `
         <li class="list-group-item d-flex justify-content-between align-items-center" data-todo="${inputValue}">
             <span>${inputValue}</span>
-            <i class="far fa-trash-alt" data-trash="${inputValue}"></i>
+            <i class="far fa-trash-alt trash-icon" data-trash="${inputValue}"></i>
         </li>`
 }
 
